@@ -1,0 +1,125 @@
+<div class="overlay" ng-controller="TutorialCtrl" ng-cloak>
+    <div class="header">
+        <p class="medium-text white-text center-text">Tutorial of Ruin</p>
+    </div>
+
+    <div class="scroller" scrollable data-footer="152">
+
+        <div ng-if="tutScreen == 0" class="fadeIn white-background black-text center-text small-margin-bottom">
+            <p class="width-90 medium-padding-top medium-padding-bottom desc-text">You are sick of watching evil swallow your home</p>
+            <p class="width-90 medium-padding-bottom desc-text">Your vow to destroy as much of that evil as you can</p>
+        </div>
+
+        <div ng-if="tutScreen == 1" class="fadeIn white-background black-text center-text small-margin-bottom overflow-auto">
+            <p class="town-heading small-margin-bottom primary-text medium-text width-90">Interface</p>
+            <p class="width-90 medium-padding-bottom desc-text">The play menu is at the bottom of the screen</p>
+            <p class="width-90 medium-padding-bottom desc-text">It looks like this:</p>
+
+            <div class="small-padding-top small-padding-bottom black-background">
+                <div class="footer tutorial white-background small-text black-text">
+                    <div class="footer-readout tutorial black-background">
+                        <div class="yellow-background"></div>
+                        <div class="red-background"></div>
+                    </div>
+
+                    <div id="menu" class="button">
+                        <p>Menu</p>
+                    </div>
+                    <div id="hero" class="button">
+                        <p>Hero</p>
+                    </div>
+                    <div id="travel" class="button">
+                        <p>Travel</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="width-90 medium-padding-top medium-padding-bottom desc-text">The <span class="yellow-text">yellow</span> line is your experience bar</p>
+            <p class="width-90 medium-padding-bottom desc-text">The <span class="red-text">red</span> line is your health bar</p>
+        </div>
+
+        <div ng-if="tutScreen == 2" class="fadeIn white-background black-text center-text small-margin-bottom overflow-auto">
+            <p class="town-heading small-margin-bottom primary-text medium-text width-90">Town</p>
+            <p class="width-90 medium-padding-bottom desc-text">Town is your main hub for game interactions</p>
+            <p class="width-90 medium-padding-bottom desc-text">You also regenerate health faster in town</p>
+            <p class="width-90 desc-text primary-text">General Store</p>
+            <p class="width-90 medium-padding-bottom desc-text">Buy new items from shopkeep Tull</p>
+            <p class="width-90 desc-text primary-text">Pawn Shop</p>
+            <p class="width-90 medium-padding-bottom desc-text">Sell items you find and don't need</p>
+            <p class="width-90 desc-text primary-text">Forge</p>
+            <p class="width-90 medium-padding-bottom desc-text">Smith Muro can increase the quality of items</p>
+            <p class="width-90 desc-text primary-text">Infirmary</p>
+            <p class="width-90 medium-padding-bottom desc-text">Healer Lelka can heal you instantly for a price</p>
+        </div>
+
+        <div ng-if="tutScreen == 3" class="fadeIn white-background black-text center-text small-margin-bottom overflow-auto">
+            <p class="town-heading small-margin-bottom primary-text medium-text width-90">Hero Screen</p>
+            <p class="width-90 medium-padding-bottom desc-text">The hero screen shows you all the information about your character</p>
+            <p class="width-90 medium-padding-bottom desc-text">Passive skills increase your damage when using a weapon of that type</p>
+            <p class="width-90 medium-padding-bottom desc-text">If you stop using a certain weapon type the related skill will decay</p>
+            <p class="width-90 medium-padding-bottom desc-text">You also have access to your bag and equipped items from this screen</p>
+        </div>
+
+        <div ng-if="tutScreen == 4" class="fadeIn white-background black-text center-text small-margin-bottom overflow-auto">
+            <p class="town-heading small-margin-bottom primary-text medium-text width-90">Stats</p>
+            <p class="width-90 desc-text primary-text">Strength</p>
+            <p class="width-90 medium-padding-bottom desc-text">Increases your damage</p>
+            <p class="width-90 desc-text primary-text">Vitality</p>
+            <p class="width-90 medium-padding-bottom desc-text">Increases your life</p>
+            <p class="width-90 desc-text primary-text">Agility</p>
+            <p class="width-90 medium-padding-bottom desc-text">Increases your chance to dodge</p>
+        </div>
+
+        <div ng-if="tutScreen == 5" class="fadeIn white-background black-text center-text small-margin-bottom overflow-auto">
+            <p class="town-heading small-margin-bottom primary-text medium-text width-90">Travel</p>
+            <p class="width-90 medium-padding-bottom desc-text">From here you can travel to any zone in the game instantly</p>
+            <p class="width-90 medium-padding-bottom desc-text">The lower the zone on the list, the harder it is</p>
+            <p class="width-90 medium-padding-bottom desc-text">You also travel back to town from this screen</p>
+        </div>
+
+        <div ng-if="tutScreen == 6" class="fadeIn white-background black-text center-text small-margin-bottom overflow-auto">
+            <p class="town-heading small-margin-bottom primary-text medium-text width-90">Zone Screen</p>
+            <p class="width-90 medium-padding-bottom desc-text">Once you arrive in a zone you will see a list of enemies</p>
+            <p class="width-90 medium-padding-bottom desc-text">You can inspect each enemy and attack them from there</p>
+        </div>
+
+        <div ng-if="tutScreen == 7" class="fadeIn white-background black-text center-text small-margin-bottom overflow-auto">
+            <p class="town-heading small-margin-bottom primary-text medium-text width-90">Combat</p>
+            <p class="width-90 medium-padding-bottom desc-text">After attacking you do not have access to the main menu</p>
+            <p class="width-90 medium-padding-bottom desc-text">The enemy life bar is at the top of the screen</p>
+            <p class="width-90 medium-padding-bottom desc-text">Yours is at the bottom</p>
+            <p class="width-90 desc-text primary-text">Flee Button</p>
+            <p class="width-90 medium-padding-bottom desc-text">If you find yourself in a fight you think you will lose you can attempt to flee the battle</p>
+            <p class="width-90 desc-text primary-text">Combat Skills</p>
+            <p class="width-90 medium-padding-bottom desc-text">At level 6 you choose your first combat skill and your second at level 12</p>
+            <p class="width-90 medium-padding-bottom desc-text">Combat skills will appear below your health bar</p>
+        </div>
+
+        <div ng-if="tutScreen == 8" class="fadeIn white-background black-text center-text small-margin-bottom overflow-auto">
+            <p class="town-heading small-margin-bottom primary-text medium-text width-90">Leveling Up</p>
+            <p class="width-90 medium-padding-bottom desc-text">When you level up you will get to distribute 5 stat points</p>
+            <p class="width-90 medium-padding-bottom desc-text">At level 6 and 12 you will get to choose a combat skill</p>
+        </div>
+
+        <div ng-if="tutScreen == 9" class="fadeIn white-background black-text center-text small-margin-bottom overflow-auto">
+            <p class="town-heading small-margin-bottom primary-text medium-text width-90">Dying</p>
+            <p class="width-90 medium-padding-bottom desc-text">Death comes with a heavy cost</p>
+            <p class="width-90 medium-padding-bottom desc-text">You will lose both gold and experience each time you die</p>
+            <p class="width-90 medium-margin-bottom desc-text primary-text">You finished the tutorial!</p>
+
+            <div class="button black-text medium-padding-bottom" ng-click="showScreen('town')">
+                <span class="yellow-background">Enter Town</span>
+            </div>
+        </div>
+    </div>
+    <div id="tutorial-controls">
+        <div class="half-buttons medium-text black-text small-margin-bottom">
+            <div class="half-button primary-background float-left" ng-class="{'black-bg-white-text': tutScreen == 0}" ng-click="back()"><p>Back</p></div>
+            <div class="half-button primary-background float-right" ng-class="{'black-bg-white-text': tutScreen == 9}" ng-click="next()"><p>Next</p></div>
+        </div>
+
+        <div class="button white-background black-text" ng-click="overlay(false)">
+            <span class="center-text small-text">Exit Tutorial</span>
+        </div>
+    </div>
+</div>

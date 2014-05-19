@@ -1,0 +1,63 @@
+<div class="screen" ng-controller="StartCtrl">
+
+    <div class="header black-background">
+        <p class="medium-text white-text center-text">{{header}}</p>
+    </div>
+
+    <div class="scroller" data-footer="0" scrollable>
+        <!-- create a new hero -->
+        <div id="new-hero" class="primary-background" ng-show="newHero">
+            <p class="new-hero-instructions small-text black-text center-text">Enter a hero name below</p>
+            <div class="new-hero-input-holder" ng-init="heroName = ''">
+                <input class="text-input medium-text center-text" type="text" ng-model="heroName" placeholder="Name" auto-blur />
+                <p class="white-text desc-text">{{error}}</p>
+            </div>
+            <div class="create-hero-button big-text yellow-text center-text">
+                <span class="pointer" ng-click="submitHero(heroName)">Create</span>
+            </div>
+        </div>
+
+        <!-- list of existing heros -->
+        <div id="hero-list" ng-hide="intro == true">
+            <div class="hero-slot clear primary-background" ng-repeat="hero in heroes track by hero.id">
+                <!-- for used hero slots -->
+                <div class="pointer width-90" ng-show="hero" ng-click="selectHero(hero)">
+                    <p class="hero-name center-text yellow-text big-text" ng-class="{'white-text': heroSelected && play.hero == hero}">{{hero.name}}</p>
+                    <p class="hero-desc black-text center-text small-text">Level {{hero.level}} {{hero.class}}</p>
+                </div>
+                <!-- selected -->
+                <div ng-show="heroSelected == hero">
+                    <div class="button black-text" ng-click="enterTown()">
+                        <span class="yellow-background">Enter Town</span>
+                    </div>
+                    <div class="delete-hero-button small-text black-text center-text" ng-hide="heroDeleted">
+                        <span class="pointer" ng-click="heroDeleted = true">Delete</span>
+                    </div>
+                </div>
+                <!-- deleting the char -->
+                <div class="two-option-menu medium-margin-bottom" ng-show="heroDeleted && play.hero == hero">
+                    <p class="delete-hero-instructions black-text small-text center-text">Are you sure you want<br />to delete {{heroSelected.name}}?</p>
+
+                    <div class="two-option-menu medium-padding-bottom">
+                        <div class="medium-text float-left">
+                            <span class="black-background white-text pointer" ng-click="heroDeleted = false">No</span>
+                        </div>
+                        <div class="medium-text float-right">
+                            <span class="yellow-background black-text pointer" ng-click="deleteHero()">Yes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- for empty hero slots -->
+            <div class="pointer hero-slot primary-background" ng-hide="hero || newHero" ng-click="createHero()">
+                <p class="new-hero yellow-text center-text big-text">New Hero</p>
+            </div>
+        </div>
+
+        <div ng-if="intro" class="white-text">
+            <div ng-if="intro" class="fadeIn primary-background" ng-repeat="intro in intros">
+                <p class="medium-padding-top medium-padding-bottom width-90">{{intro}}</p>
+            </div>
+        </p>
+    </div>
+</div>

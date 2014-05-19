@@ -1,0 +1,608 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td { margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent; }
+body { line-height:1; }
+ol,ul { list-style:none; }
+blockquote,q { quotes:none; }
+blockquote:before,blockquote:after,q:before,q:after { content:'';content:none; }
+ins { text-decoration:none; }
+del { text-decoration:line-through; }
+table { border-collapse:collapse;border-spacing:0; }
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+
+@font-face {
+    font-family: 'lilita_oneregular';
+    src: url('../assets/lilitaone-regular-webfont.eot');
+    src: url('../assets/lilitaone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../assets/lilitaone-regular-webfont.woff') format('woff'),
+         url('../assets/lilitaone-regular-webfont.ttf') format('truetype'),
+         url('../assets/lilitaone-regular-webfont.svg#lilita_oneregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//font
+$font: 'lilita_oneregular';
+
+//text sizes
+$bigText: 58px;
+$mediumText: 32px;
+$smallText: 22px;
+
+//colors
+$primary: #d64343;
+$red: #d64343;
+$yellow: #e2b954;
+$white: #e5e5e5;
+$black: #2e2b2a;//#1d1d1d;
+
+//margins
+$bigMargin: 50px;
+$mediumMargin: 22px;
+$smallMargin: 8px;
+
+//widths
+$screenWidth: 320px;
+$halfScreen: $screenWidth / 2;
+$normalWidth: 90%;
+
+//mixins
+@mixin button-medium-text {
+    font-size: $mediumText;
+    padding-top: $mediumMargin;
+    padding-bottom: $mediumMargin;
+}
+
+//defaults
+//======================================================
+body, html {
+    font-family: $font;
+    text-transform: uppercase;
+    font-size: $smallText;
+    color: $white;
+    width: 100%;
+    height: 100%;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+a {
+    text-decoration: none;
+    color: $black;
+}
+#aor {
+    position: relative;
+    max-width: $screenWidth;
+    max-height: 640px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+//general
+//======================================================
+.pointer {
+    cursor: pointer;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.overflow-auto {
+    overflow: auto;
+}
+.clear {
+    clear: both;
+}
+.text-input {
+    background: $white;
+    border: none;
+    color: $black;
+    box-sizing: border-box;
+    padding: 6px;
+    width: 100%;
+    font-family: $font;
+    text-transform: uppercase;
+}
+.width-90 {
+    width: $normalWidth;
+    margin: 0 auto;
+}
+.big-margin-bottom {
+    margin-bottom: $bigMargin;
+}
+.medium-margin-bottom {
+    margin-bottom: $mediumMargin;
+}
+.small-margin-bottom {
+    margin-bottom: $smallMargin;
+}
+.small-margin-top {
+    margin-top: $smallMargin;
+}
+.medium-margin-top {
+    margin-top: $mediumMargin;
+}
+.big-margin-top {
+    margin-top: $bigMargin;
+}
+.medium-padding-top {
+    padding-top: $mediumMargin;
+}
+.small-padding-top {
+    padding-top: $smallMargin;
+}
+.big-padding-bottom {
+    padding-bottom: $bigMargin;
+}
+.medium-padding-bottom {
+    padding-bottom: $mediumMargin;
+}
+.small-padding-bottom {
+    padding-bottom: $smallMargin;
+}
+.black-border-bottom {
+    border-bottom: 8px solid $black;
+}
+
+.force-top {
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    width: 100%;
+}
+
+$fadeTime: 0.1666s;
+$fadeDelay: 0.3s;
+
+.fadeIn.ng-enter,
+.fadeIn.ng-add {
+    -webkit-animation: enter_sequence $fadeTime $fadeDelay linear; // Safari/Chrome
+    -moz-animation: enter_sequence $fadeTime $fadeDelay linear; // Firefox
+    -o-animation: enter_sequence $fadeTime $fadeDelay linear; // Opera
+    animation: enter_sequence $fadeTime $fadeDelay linear; // IE10+ and Future Browsers
+    opacity: 0;
+}
+@-webkit-keyframes enter_sequence {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+@-moz-keyframes enter_sequence {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+@-o-keyframes enter_sequence {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+@keyframes enter_sequence {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+
+
+//text
+//======================================================
+.primary-text {
+    color: $primary;
+}
+.red-text {
+    color: $red;
+}
+.yellow-text {
+    color: $yellow;
+}
+.white-text {
+    color: $white;
+}
+.black-text {
+    color: $black;
+}
+.big-text {
+    font-size: $bigText;
+    line-height: 90%;
+}
+.medium-text {
+    font-size: $mediumText;
+}
+.small-text {
+    font-size: $smallText;
+}
+.center-text {
+    text-align: center;
+}
+.align-right {
+    text-align: right;
+}
+.align-left {
+    text-align: left;
+}
+.desc-text {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.8px;
+}
+
+
+
+//backgrounds
+//======================================================
+.primary-background {
+    background: $primary;
+}
+.red-background {
+    background: $red;
+}
+.yellow-background {
+    background: $yellow;
+}
+.white-background {
+    background: $white;
+}
+.black-background {
+    background: $black;
+}
+
+//text background combos
+//======================================================
+.black-bg-white-txt {
+    background: $black;
+    color: $white;
+}
+
+//components
+//======================================================
+.header {
+    background: $black;
+    height: 60px;
+    p {
+        padding: 14px;
+    }
+    p.small-text {
+        padding: 20px;
+    }
+}
+.button-list {
+    li {
+        cursor: pointer;
+        border-bottom: 8px solid $black;
+
+        p {
+            @include button-medium-text;
+        }
+    }
+}
+.two-option-menu {
+    overflow: auto;
+    width: 80%;
+    margin: 0 auto;
+
+    span {
+        display: inline-block;
+        padding: 13px;
+        min-width: 60px;
+    }
+}
+
+.small-list-item {
+    padding: 12px 0;
+}
+
+//item related
+.item-grid {
+    overflow: auto;
+}
+.button {
+    margin: 0 auto;
+    cursor: pointer;
+
+    span {
+        display: inline-block;
+        @include button-medium-text;
+        padding-left: 30px;
+        padding-right: 30px;
+        min-width: 40%;
+    }
+}
+.small-button {
+    margin: 0 auto;
+    font-size: $smallText;
+    padding-bottom: 20px;
+
+    span {
+        display: inline-block;
+        padding: 13px;
+        cursor: pointer;
+    }
+}
+
+.expanding-list {
+    .expanding-list-item {
+        border-bottom: 8px solid $black;
+    }
+    .collapsed {
+        p {
+            @include button-medium-text;
+        }
+        p.desc-text {
+            font-size: 18px;
+        }
+    }
+}
+.half-buttons {
+    overflow: auto;
+
+    .half-button {
+        width: $halfScreen - 4;
+        height: 60px;
+        cursor: pointer;
+
+        p {
+            padding: 13px 0 13px;
+        }
+    }
+}
+.stat-list {
+    margin: 0 auto $mediumMargin;
+    width: 70%;
+    li {
+        clear: both;
+        overflow: hidden;
+    }
+    .stat-name {
+        float: left;
+        text-align: left;
+        width: 48%;
+    }
+    .stat-val {
+        float: right;
+        text-align: right;
+        width: 48%;
+    }
+}
+
+//OVERLAYS
+//======================================================
+.overlay {
+    width: 100%;
+}
+
+#overlay-holder, #scren-holder {
+    background: $black;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.scroller {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.scroller > * {
+    position: relative;
+    -webkit-transform: translateZ(0px);
+    -webkit-transform: translate3d(0,0,0);
+}
+
+.footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    overflow: auto;
+
+    .button {
+        height: 60px;
+        width: 33%;
+        float: left;
+        cursor: pointer;
+
+        p {
+            padding: 19px 0 19px;
+        }
+
+        &:last-child {
+            float: right;
+        }
+    }
+    &.tutorial {
+        position: static;
+    }
+}
+.footer-readout {
+    width: 100%;
+
+    div {
+        height: 8px;
+    }
+
+    &.tutorial {
+        position: static;
+    }
+}
+
+//MENU SCREEN
+//======================================================
+#tutorial-controls {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+}
+
+//MENU SCREEN
+//======================================================
+.famed-kills {
+    .stat-list {
+        width: 90%;
+
+        .stat-name {
+            width: 80%;
+        }
+        .stat-val {
+            width: 20%;
+        }
+    }
+}
+
+//START SCREEN
+//======================================================
+#new-hero {
+    border-bottom: 8px solid $black;
+
+    .new-hero-instructions {
+        padding-top: $bigMargin;
+        margin-bottom: $mediumMargin;
+    }
+    .new-hero-input-holder {
+        width: 70%;
+        margin: 0 auto 40px;
+    }
+    .create-hero-button {
+        margin-bottom: 40px;
+    }
+}
+.hero-slot {
+    border-bottom: 8px solid $black;
+
+    .button {
+        margin-bottom: $mediumMargin;
+    }
+
+    .delete-hero-button {
+        margin-bottom: $mediumMargin;
+    }
+}
+.hero-name {
+    padding-top: 50px;
+    margin-bottom: 10px;
+}
+.hero-desc {
+    margin-bottom: 50px;
+}
+.new-hero {
+    padding-top: $bigMargin;
+    margin-bottom: $bigMargin;
+}
+.delete-hero-instructions {
+    margin-bottom: $mediumMargin;
+}
+
+//TOWN SCREEN
+//======================================================
+.town-heading {
+    padding-top: $mediumMargin;
+}
+.town-description {
+    margin: 0 auto $mediumMargin;
+}
+.buy-instructions {
+    padding-top: $mediumMargin;
+    margin-bottom: $mediumMargin;
+}
+.item-inspect {
+    .item-name {
+        padding-top: $mediumMargin;
+    }
+    .button {
+        margin-top: $mediumMargin;
+        margin-bottom: $mediumMargin;
+    }
+}
+.item-bought, .item-sold, .item-forged {
+    margin-top: $mediumMargin;
+    margin-bottom: $mediumMargin;
+}
+.forge-label {
+    background: $black;
+    color: $white;
+    padding: $smallMargin;
+}
+
+//COMBAT SCREEN
+//======================================================
+.mob-health-bar, .hero-health-bar {
+    .health-progress {
+        height: 60px;
+    }
+
+    p {
+        width: 100%;
+        position: absolute;
+        top: 18px;
+    }
+}
+.hero-health-bar {
+    width: 100%;
+    position: absolute;
+    bottom: 60px;
+}
+.combat-status {
+    p {
+        padding: 10px;
+    }
+}
+.flee {
+    p {
+        padding: 12px;
+    }
+}
+.no-skills {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+
+    p {
+        padding: 19px;
+    }
+}
+.combat-skill-status {
+    background: $red;
+    text: $white;
+}
+.combat-skills {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+}
+.combat-log {
+    padding-bottom: 20px;
+}
+.black-bg-white-text {
+    background: $black;
+    color: $white;
+}
+.take-button {
+    p {
+        width: 60%;
+        margin: 0px auto 30px;
+        display: inline-block;
+        padding: 19px;
+    }
+}
+//LEVEL UP
+.level-up-stat {
+    width: 96%;
+    margin: 0 auto;
+
+    span {
+        box-sizing: border-box;
+        display: inline-block;
+        padding: 19px;
+        width: 18%;
+
+        &.stat-name {
+            width: 60%;
+        }
+    }
+}

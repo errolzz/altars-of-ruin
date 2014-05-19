@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="App">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+        <title>Altars of Ruin</title>
+        <link rel='stylesheet' href='stylesheets/style.css' />
+
+    </head>
+    <body ng-controller="AppCtrl">
+        <div id="aor" class="black-background red-grey-text center-text" ng-init="init()" eat-click>
+            <div id="screen-holder" class="fadeIn" ng-cloak ng-hide="view.overlay" ng-include="'partials/' + view.screen + '.html'"></div>
+
+            <div id="overlay-holder" 
+                ng-cloak ng-class="{'fadeIn': view.overlayScreen == 'tutorial'}" 
+                ng-show="view.overlay" 
+                ng-include="'partials/' + view.overlayScreen + '.html'">
+            </div>
+
+            <div class="footer white-background small-text black-text" ng-if="view.footer && view.overlayFooter">
+
+                <div class="footer-readout black-background" ng-if="play">
+                    <div class="yellow-background" hero-exp-progress></div>
+                    <div class="red-background" hero-health-progress></div>
+                </div>
+
+                <div id="menu" class="button" ng-class="{'black-bg-white-txt': view.overlay && view.overlayScreen == 'menu'}" ng-click="overlay('menu')">
+                    <p>Menu</p>
+                </div>
+                <div id="hero" class="button" ng-class="{'black-bg-white-txt': view.overlay && view.overlayScreen == 'hero'}" ng-click="overlay('hero')">
+                    <p>Hero</p>
+                </div>
+                <div id="travel" class="button" ng-class="{'black-bg-white-txt': view.overlay && view.overlayScreen == 'travel'}" ng-click="overlay('travel')">
+                    <p>Travel</p>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="javascripts/lib/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="javascripts/utils.js"></script>
+        <script type="text/javascript" src="javascripts/lib/angular/angular.min.js"></script>
+        <script type="text/javascript" src="javascripts/lib/angular/angular-animate.min.js"></script>
+        <script type="text/javascript" src="javascripts/lib/angular/angular-touch.min.js"></script>
+        <script type="text/javascript" src="javascripts/controllers.js"></script>
+        <script type="text/javascript" src="javascripts/world.js"></script>
+        <script type="text/javascript" src="javascripts/directives.js"></script>
+        <script type="text/javascript" src="javascripts/services.js"></script>
+        <script type="text/javascript" src="javascripts/filters.js"></script>
+        <script type="text/javascript" src="javascripts/zones.js"></script>
+        <script type="text/javascript" src="javascripts/items.js"></script>
+        <script type="text/javascript" src="javascripts/app.js"></script>
+    </body>
+</html>

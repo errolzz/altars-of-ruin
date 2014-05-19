@@ -1,0 +1,429 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+ins {
+  text-decoration: none; }
+
+del {
+  text-decoration: line-through; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none; }
+
+@font-face {
+  font-family: 'lilita_oneregular';
+  src: url("../assets/lilitaone-regular-webfont.eot");
+  src: url("../assets/lilitaone-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../assets/lilitaone-regular-webfont.woff") format("woff"), url("../assets/lilitaone-regular-webfont.ttf") format("truetype"), url("../assets/lilitaone-regular-webfont.svg#lilita_oneregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+body, html {
+  font-family: "lilita_oneregular";
+  font-size: 22px;
+  color: #2e2b2a;
+  width: 100%;
+  height: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-transform: uppercase; }
+
+footer {
+  padding: 20px;
+  border-top: 10px solid #d64343; }
+  footer p {
+    margin-bottom: 20px; }
+  footer .float-right {
+    float: none;
+    overflow: hidden;
+    text-align: right;
+    font-size: 0.7em;
+    width: 154px;
+    margin: 0 auto; }
+    footer .float-right span {
+      float: left;
+      display: block;
+      margin-right: 6px; }
+  footer .game-footer {
+    margin-bottom: 10px; }
+
+p {
+  line-height: 1.4;
+  letter-spacing: 0.6px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 0.8em; }
+
+#aor {
+  position: relative;
+  max-width: 320px;
+  max-height: 640px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden; }
+
+.app-store-button {
+  display: inline-block;
+  width: 135px;
+  height: 40px;
+  background-image: url("../images/app-store-button.png");
+  margin-bottom: 12px; }
+
+.fb-button {
+  padding: 6px; }
+
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+  .app-store-button {
+    background-image: url("../images/app-store-button@2x.png");
+    background-size: 135px 40px; } }
+.pointer {
+  cursor: pointer; }
+
+.float-left {
+  float: left; }
+
+.float-right {
+  float: right; }
+
+.overflow-auto {
+  overflow: auto; }
+
+.clear {
+  clear: both; }
+
+.text-input {
+  background: #e5e5e5;
+  border: none;
+  color: #2e2b2a;
+  box-sizing: border-box;
+  padding: 6px;
+  width: 100%;
+  font-family: "lilita_oneregular";
+  text-transform: uppercase; }
+
+.width-90 {
+  width: 90%;
+  margin: 0 auto; }
+
+.section-content {
+  margin: 0 auto;
+  width: 94%;
+  max-width: 1000px; }
+
+.big-margin-bottom {
+  margin-bottom: 50px; }
+
+.medium-margin-bottom {
+  margin-bottom: 22px; }
+
+.small-margin-bottom {
+  margin-bottom: 8px; }
+
+.small-margin-top {
+  margin-top: 8px; }
+
+.medium-margin-top {
+  margin-top: 22px; }
+
+.big-margin-top {
+  margin-top: 50px; }
+
+.medium-padding-top {
+  padding-top: 22px; }
+
+.small-padding-top {
+  padding-top: 8px; }
+
+.big-padding-bottom {
+  padding-bottom: 50px; }
+
+.medium-padding-bottom {
+  padding-bottom: 22px; }
+
+.small-padding-bottom {
+  padding-bottom: 8px; }
+
+.black-border-bottom {
+  border-bottom: 8px solid #2e2b2a; }
+
+.force-top {
+  position: absolute;
+  top: 68px;
+  left: 0px;
+  width: 100%; }
+
+.fadeIn.ng-enter,
+.fadeIn.ng-add {
+  -webkit-animation: enter_sequence 0.1666s 0.3s linear;
+  -moz-animation: enter_sequence 0.1666s 0.3s linear;
+  -o-animation: enter_sequence 0.1666s 0.3s linear;
+  animation: enter_sequence 0.1666s 0.3s linear;
+  opacity: 0; }
+
+@-webkit-keyframes enter_sequence {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-moz-keyframes enter_sequence {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-o-keyframes enter_sequence {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@keyframes enter_sequence {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+.primary-text {
+  color: #d64343; }
+
+.red-text {
+  color: #d64343; }
+
+.yellow-text {
+  color: #e2b954; }
+
+.white-text {
+  color: #e5e5e5; }
+
+.black-text {
+  color: #2e2b2a; }
+
+.big-text {
+  font-size: 58px;
+  line-height: 90%; }
+
+.medium-text {
+  font-size: 20px;
+  line-height: 36px; }
+
+.small-text {
+  font-size: 22px; }
+
+.center-text {
+  text-align: center; }
+
+.align-right {
+  text-align: right; }
+
+.align-left {
+  text-align: left; }
+
+.desc-text {
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.8px; }
+
+.primary-background {
+  background: #d64343; }
+
+.red-background {
+  background: #d64343; }
+
+.yellow-background {
+  background: #e2b954; }
+
+.white-background {
+  background: #e5e5e5; }
+
+.black-background {
+  background: #2e2b2a; }
+
+h1 {
+  font-size: 2.4em;
+  margin-bottom: 12px;
+  text-align: center; }
+
+h2 {
+  font-size: 1.6em;
+  margin-bottom: 20px;
+  text-align: center; }
+
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.4em; }
+
+ul {
+  list-style: none;
+  text-align: center;
+  margin-bottom: 50px; }
+  ul li {
+    margin-bottom: 10px; }
+
+a {
+  color: #e5e5e5;
+  text-decoration: none; }
+  a:hover {
+    color: #e2b954; }
+
+section {
+  padding: 50px 0px; }
+
+nav {
+  width: 90%;
+  position: inherit;
+  padding: 10px 5%;
+  overflow: auto; }
+  nav ul {
+    margin-bottom: 0px; }
+    nav ul li {
+      font-size: 30px;
+      padding: 8px 0;
+      margin-bottom: 0px; }
+  nav .menu-button {
+    display: block;
+    cursor: pointer; }
+  nav .main-menu {
+    display: none; }
+
+header {
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 50px 0px; }
+  header p {
+    text-transform: uppercase;
+    font-size: 0.8em;
+    margin-bottom: 80px; }
+  header.small {
+    padding: 20px 0px; }
+    header.small h1 {
+      font-size: 2em;
+      margin-top: 16px; }
+
+.two-column {
+  width: 90%;
+  margin: 0 auto;
+  overflow: auto;
+  padding-bottom: 6px; }
+  .two-column div {
+    float: none;
+    width: 100%; }
+    .two-column div:first-child {
+      margin-right: 0; }
+
+.site-button {
+  font-size: 1.6em;
+  padding: 30px; }
+
+.item-qualities li {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 400px; }
+
+.like-holder {
+  position: relative;
+  padding-bottom: 30px;
+  overflow: hidden; }
+  .like-holder .fb-like {
+    position: absolute;
+    top: 0px;
+    left: 0px; }
+
+.screenshots img {
+  width: 90%;
+  display: block;
+  margin: 0 auto 20px;
+  border: 4px solid #2e2b2a; }
+
+@media only screen and (min-width: 666px) {
+  .medium-text {
+    font-size: 30px;
+    line-height: 46px; }
+
+  footer p {
+    margin-bottom: 0px; }
+  footer .float-right {
+    float: right; }
+
+  h1 {
+    font-size: 5em;
+    margin-bottom: 10px; }
+
+  h2 {
+    font-size: 2em; }
+
+  header {
+    padding: 142px 0px; }
+    header p {
+      font-size: 1.2em;
+      text-align: center; }
+    header.small {
+      padding: 20px 0px; }
+      header.small h1 {
+        font-size: 2em;
+        margin-top: 50px; }
+
+  nav {
+    position: fixed;
+    padding: 10px 5%;
+    border-bottom: 10px solid #d64343; }
+    nav ul {
+      max-width: 600px;
+      margin: 0 auto; }
+      nav ul li {
+        font-size: 22px;
+        padding: 0;
+        float: left;
+        width: 20%;
+        text-align: center;
+        margin-bottom: 0px; }
+    nav .menu-button {
+      display: none; }
+    nav .main-menu {
+      display: block; }
+
+  .screenshots img {
+    width: 30%;
+    display: inline-block;
+    margin: 20px 10px; }
+
+  .two-column {
+    max-width: 1000px; }
+    .two-column div {
+      float: left;
+      width: 47%; }
+      .two-column div:first-child {
+        margin-right: 6%; } }
