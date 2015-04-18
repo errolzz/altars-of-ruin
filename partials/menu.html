@@ -1,0 +1,24 @@
+<div class="overlay">
+    <div class="header">
+        <p class="medium-text white-text center-text">Menu</p>
+    </div>
+
+    <ul ng-hide="kills" class="button-list primary-background black-text">
+        <li hm-tap="kills = true"><p>Famed Kills</p></li>
+        <li hm-tap="overlay('tutorial')"><p>Tutorial</p></li>
+        <li hm-tap="showScreen('start')"><p>Switch Hero</p></li>
+    </ul>
+
+    <div class="famed-kills" ng-if="kills">
+        <p class="primary-text medium-text medium-margin-bottom">Famed Kills</p>
+        <div class="scroller medium-margin-bottom" data-footer="170" scrollable>
+            <ul class="stat-list white-text desc-text">
+                <li><p class="stat-name yellow-text">Name</p> <p class="stat-val yellow-text">Kills</p></li>
+                <li ng-repeat="mob in play.hero.kills" ng-class="{'primary-text': mob.kills > 0}"><p class="stat-name">{{mob.name}}</p> <p class="stat-val">{{mob.kills}}</p></li>
+            </ul>
+        </div>
+        <div class="small-button">
+            <span class="black-text white-background center-text" hm-tap="$parent.kills = false">Back to Menu</span>
+        </div>
+    </div>
+</div>

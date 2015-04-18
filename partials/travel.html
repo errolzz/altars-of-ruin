@@ -1,0 +1,57 @@
+<div class="overlay" ng-controller="TravelCtrl" ng-init="init()" ng-cloak>
+    <div class="header">
+        <p ng-if="!play.tier" class="small-text white-text center-text">Select a Region</p>
+        <p ng-if="play.tier" class="small-text white-text center-text">{{play.tier.name}}</p>
+    </div>
+
+    <div class="scroller" scrollable>
+        <!-- list of areas -->
+        <ul ng-if="tierView && !selectedZone" class="expanding-list">
+            <li class="primary-background small-margin-bottom yellow-text small-text">
+                <div hm-tap="travel(zones[0])" class="primary-background width-90">
+                    <p class="small-list-item overflow-auto pointer">
+                        <span class="float-left" ng-class="{'white-text': play.zone.id == 'town'}">Town</span>
+                    </p>
+                </div>
+            </li>
+            <li class="primary-background small-margin-bottom yellow-text small-text" ng-repeat="tier in tiers">
+                <div hm-tap="selectTier(tier)" class="primary-background width-90">
+                    <p class="small-list-item overflow-auto pointer">
+                        <span class="float-left" ng-class="{'white-text': play.tier.tier == tier.tier}">{{tier.name}}</span>
+                        <span class="desc-text black-text float-right">{{tier.min}} - {{tier.max}}</span>
+                    </p>
+                </div>
+            </li>
+        </ul>
+
+        <!-- list of zones -->
+        <ul ng-if="play.tier && !tierView && !selectedZone" class="expanding-list">
+
+            <li class="expanding-list-item white-background black-text small-text pointer">
+                <div hm-tap="showTiers()" class="small-list-item">
+                    <p class="center-text">Change Region</p>
+                </div>
+            </li>
+
+            <li class="primary-background small-margin-bottom yellow-text small-text" ng-repeat="zone in play.tier.zones">
+                <div hm-tap="selectZone(zone)" class="primary-background width-90">
+                    <p class="small-list-item overflow-auto pointer">
+                        <span ng-class="{'white-text': play.zone.id == zone.id}">{{zone.name}}</span><br />
+                    </p>
+                </div>
+            </li>
+        </ul>
+
+        <!-- zone display -->
+        <div class="primary-background black-text" ng-if="selectedZone">
+            <p class="item-name medium-text white-text medium-padding-top medium-margin-bottom pointer">{{selectedZone.name}}</p>
+            <p class="desc-text small-text medium-margin-bottom">{{selectedZone.desc}}</p>
+            
+            <div class="button">
+                <span class="yellow-background medium-text pointer center-text" hm-tap="travel(selectedZone)">Go There</span>
+            </div>
+            <p class="big-margin-top medium-padding-bottom pointer" hm-tap="cancelZone()">Back</p>
+        </div>
+
+    </div>
+</div>

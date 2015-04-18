@@ -1,0 +1,214 @@
+<div class="screen" ng-controller="WorldCtrl">
+    <div class="header" ng-hide="fighting">
+        <p class="small-text white-text center-text">{{header}}</p>
+    </div>
+
+    <!-- list of monsters -->
+    <div ng-if="!fighting && !results && !chooseStats && !chooseSkill" class="scroller" scrollable ng-cloak>
+        <ul ng-if="!selectedMob || !play.mob" class="expanding-list">
+            <li class="primary-background small-margin-bottom yellow-text small-text" ng-repeat="mob in play.mobs">
+                <div hm-tap="selectMob(mob)" class="primary-background width-90">
+                    <p class="small-list-item overflow-auto pointer">
+                        <span class="float-left">{{mob.name}}</span>
+                        <span class="desc-text black-text float-right">{{mob.level}}</span>
+                    </p>
+                </div>
+            </li>
+            <li ng-if="play.mobs.length < 4" class="white-background black-text small-text pointer">
+                <div hm-tap="respawnZone()" class="small-list-item">
+                    <p class="center-text">Respawn Zone</p>
+                </div>
+            </li>
+        </ul>
+
+        <!-- mob display -->
+        <div ng-if="play.mob && selectedMob" class="primary-background black-text">
+            <p class="item-name medium-text white-text medium-padding-top medium-margin-bottom pointer">{{selectedMob.name}}</p>
+            <p class="desc-text small-text medium-margin-bottom width-90">
+                {{selectedMob.desc}}<br />
+                <span class="desc-text white-text">Level {{selectedMob.level}}</span>
+            </p>
+            
+            <div class="button">
+                <span class="yellow-background medium-text pointer center-text" hm-tap="setupAttack()">Attack</span>
+            </div>
+            <p class="big-margin-top medium-padding-bottom pointer" hm-tap="selectMob(selectedMob)">Back</p>
+        </div>
+    </div>
+
+    <!-- combat -->
+    <div ng-if="fighting">
+        <div class="mob-health-bar">
+            <div class="health-progress red-background" mob-health-progress></div>
+            <p class="center-text small-text white-text">{{play.mob.name}}</p>
+        </div>
+        
+        <div class="flee yellow-background small-margin-bottom pointer" hm-tap="flee()"><p class="white-text center-text">Flee!</p></div>
+
+        <div class="combat-log scroller white-background" data-top="106" data-footer="156" scrollable combat-log>
+            <div ng-repeat="status in combatStatuses" class="combat-status" ng-class="status.statusClass">
+                <p class="desc-text">{{status.message}}</p>
+            </div>
+        </div>
+
+        <div class="hero-health-bar">
+            <div class="health-progress red-background" hero-health-progress></div>
+            <p class="center-text small-text white-text">{{play.hero.name}}</p>
+        </div>
+        
+        <div class="no-skills">
+            <p class="white-text small-text" ng-show="play.hero.combatSkills.length == 0">No combat skills yet</p>
+        </div>
+        
+        <div class="combat-skills half-buttons medium-text black-text">
+            <div ng-show="play.hero.combatSkills.length > 0" class="half-button white-background float-left" ng-class="{'black-bg-white-text': play.hero.combatSkills[0].used}" hm-tap="combatSkill(0)" eat-click>
+                <p>{{play.hero.combatSkills[0].name}}</p>
+            </div>
+            <div ng-show="play.hero.combatSkills.length > 1" class="half-button white-background float-right" ng-class="{'black-bg-white-text': play.hero.combatSkills[1].used}" hm-tap="combatSkill(1)" eat-click>
+                <p>{{play.hero.combatSkills[1].name}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- combat results -->
+    <div ng-if="results">
+        <div ng-show="victory">
+            <div class="white-background black-text">
+                <div class="width-90">
+                    <p class="black-text medium-padding-top small-margin-bottom">You have defeated<br /><span class="primary-text">{{play.mob.name}}</span></p>
+                    <p>+ {{play.mob.level}} experience</p>
+                    <p class="medium-padding-bottom">+ {{gold}} gold</p>
+                </div>
+
+                <div class="small-button" ng-hide="loot">
+                    <span class="white-text black-background center-text" hm-tap="continue()">Continue</span>
+                </div>
+            </div>
+
+            <div ng-show="loot" class="primary-background scroller" data-top="200" data-footer="0" scrollable>
+                <!-- life potion -->
+                <div ng-show="loot.type == 'lifePotion'">
+                    <p class="item-name white-text medium-text width-90 medium-padding-top medium-margin-bottom">Life Potion</p>
+                    <ul class="medium-margin-bottom black-text">
+                        <li class="medium-margin-bottom">Returns you to full life</li>
+                        <li class="medium-margin-bottom">Not usable during combat</li>
+                        <li>Weight: <span class="white-text">0.1</span></li>
+                        <li>Worth: <span class="white-text">5 gold</span></li>
+                    </ul>
+                </div>
+
+                <!-- item drop -->
+                <div ng-show="loot.type != 'lifePotion'">
+                    <p class="item-name white-text medium-text width-90 medium-padding-top medium-margin-bottom">{{loot.name}}</p> 
+                    <ul class="medium-margin-bottom black-text">
+                        <li ng-show="loot.fingerprint.length < 4" class="center-text black-text">{{loot.type}}</li>
+                        <li ng-show="loot.class == 'armor'">Armor: <span class="white-text">{{loot.value}}</span></li>
+                        <li ng-show="loot.class == 'weapon'">Damage: <span class="white-text">{{loot.value}}</span></li>
+                        <li ng-show="loot.strength > 0">Strength: <span class="white-text">+{{loot.strength}}</span></li>
+                        <li ng-show="loot.vitality > 0">Vitality: <span class="white-text">+{{loot.vitality}}</span></li>
+                        <li ng-show="loot.agility > 0">Agility: <span class="white-text">+{{loot.agility}}</span></li>
+                        <li ng-show="loot.maxLife > 0">Life: <span class="white-text">+{{loot.maxLife}}</span></li>
+                        <li ng-show="loot.haste > 0">Haste: <span class="white-text">+{{loot.haste}}</span></li>
+                        <li>Weight: <span class="white-text">{{loot.weight}}</span></li>
+                        <li>Worth: <span class="white-text">{{loot.worth}} gold</span></li>
+                    </ul>
+                </div>
+
+                <div class="take-button">
+                    <p class="yellow-background medium-text white-text pointer center-text" hm-tap="takeLoot()">Take</p>
+                </div>
+
+                <div class="small-button ">
+                    <span class="white-text black-background center-text" hm-tap="continue()">Discard</span>
+                </div>
+            </div>
+        </div>
+
+        <div ng-hide="victory">
+            <div class="white-background black-text">
+                <p class="primary-text medium-padding-top medium-margin-bottom">You have lost your fight with {{play.mob.name}}</p>
+                <p class="small-margin-bottom">You have lost some experience</p>
+                <p class="medium-margin-bottom">You have lost some gold</p>
+
+                <div class="small-button">
+                    <span class="white-text black-background center-text" hm-tap="revive()">Revive In Town</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- level up! -->
+    <div ng-show="chooseStats && !results" class="scroller force-top" data-top="60" data-footer="0" scrollable>
+        <div class="white-background black-text">
+            <p class="medium-padding-top">You have reached</p>
+            <p class="medium-text center-text primary-text medium-margin-bottom">level {{play.hero.level}}!</p>
+            <p class="medium-padding-bottom">You have {{statPoints.free}} stat points to spend</p>
+        </div>
+        
+        <div class="primary-background medium-margin-bottom">
+            <div class="level-up-stat medium-padding-top small-padding-bottom">
+                <span class="stat-name white-background black-text">Strength: {{play.hero.addedStrength}}</span><span class="black-background white-text center-text pointer" hm-tap="changeStat('addedStrength', -1)" eat-click>-</span><span class="yellow-background black-text center-text pointer" hm-tap="changeStat('addedStrength', 1)" eat-click>+</span>
+            </div>
+            <div class="level-up-stat small-padding-bottom">
+                <span class="stat-name white-background black-text">Vitality: {{play.hero.addedVitality}}</span><span class="black-background white-text center-text pointer" hm-tap="changeStat('addedVitality', -1)" eat-click>-</span><span class="yellow-background black-text center-text pointer" hm-tap="changeStat('addedVitality', 1)" eat-click>+</span>
+            </div>
+            <div class="level-up-stat medium-padding-bottom">
+                <span class="stat-name white-background black-text">Agility: {{play.hero.addedAgility}}</span><span class="black-background white-text center-text pointer" hm-tap="changeStat('addedAgility', -1)" eat-click>-</span><span class="yellow-background black-text center-text pointer" hm-tap="changeStat('addedAgility', 1)" eat-click>+</span>
+            </div>
+            <div class="small-button">
+                <span class="yellow-background black-text center-text" hm-tap="continue()" ng-show="statPoints.free == 0">Done</span>
+            </div>
+        </div>
+
+        <div class="black-background">
+            <div class="width-90 white-text desc-text">
+                <p class="small-margin-bottom"><span class="yellow-text">Strength:</span><br />Increases your damage</p>
+                <p class="small-margin-bottom"><span class="yellow-text">Vitality:</span><br />Increases your max life</p>
+                <p class="small-margin-bottom"><span class="yellow-text">Agility:</span><br />Increases your chance to dodge</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- choose combat skill -->
+    <div ng-show="chooseSkill && !results && !chooseStats" class="scroller force-top" data-footer="0" scrollable>
+        <ul class="expanding-list" ng-if="!skillToLearn">
+            <li class="white-background small-padding-top small-padding-bottom small-margin-bottom">
+                <p class="black-text">Choose wisely, you <span class="red-text">cannot</span> change this later!</p>
+            </li>
+            <li class="primary-background small-margin-bottom yellow-text small-text" ng-repeat="skill in availableSkills">
+                <div hm-tap="selectSkillToLearn(skill)" class="primary-background width-90">
+                    <p class="small-list-item overflow-auto pointer">
+                        <span class="center-text pointer">{{skill.name}}</span>
+                    </p>
+                </div>
+            </li>
+        </ul>
+
+        <div ng-show="skillToLearn" class="primary-background item-inspect black-text center-text overflow-auto">
+            <p class="item-name white-text medium-text medium-margin-bottom pointer" hm-tap="skillToLearn.selected = false; skillToLearn = undefined;">{{skillToLearn.name}}</p> 
+            <p class="black-text medium-margin-bottom width-90">{{skillToLearn.desc}}</p>
+
+            <ul class="width-90">
+                <li class="white-text small-margin-bottom desc-text" ng-repeat="bullet in skillToLearn.bullets">{{bullet}}</li>
+            <ul>
+            
+            <div class="button">
+                <span class="yellow-background medium-text black-text pointer center-text" hm-tap="skillToLearn.learn = true">Learn</span>
+            </div>
+
+            <p ng-show="!skillToLearn.learn" class="big-margin-top medium-padding-bottom pointer" hm-tap="skillToLearn.selected = false; skillToLearn = undefined">Back</p>
+
+            <div ng-show="skillToLearn.learn" class="medium-margin-top medium-margin-bottom">
+                <p class="black-text center-text medium-margin-bottom">Are you sure you want to learn {{skillToLearn.name}}?</p>
+                <div class="two-option-menu">
+                    <div class="medium-text float-left">
+                        <span class="black-background white-text pointer" hm-tap="skillToLearn.learn = false">No</span>
+                    </div>
+                    <div class="medium-text float-right">
+                        <span class="yellow-background black-text pointer" hm-tap="learnSkill()">Yes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

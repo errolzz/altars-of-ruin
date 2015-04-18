@@ -1,0 +1,173 @@
+<div class="overlay" ng-controller="HeroCtrl" ng-init="buildHero()" ng-cloak>
+    <div class="header">
+        <p class="medium-text white-text center-text">Hero</p>
+    </div>
+
+    <div class="half-buttons medium-text black-text small-margin-bottom">
+        <div class="half-button primary-background float-left" ng-class="{'white-text': heroScreen == 'stats'}" hm-tap="heroScreen = 'stats'"><p>Stats</p></div>
+        <div class="half-button primary-background float-right" ng-class="{'white-text': heroScreen == 'skills'}" hm-tap="heroScreen = 'skills'"><p>Skills</p></div>
+    </div>
+    <div class="half-buttons medium-text black-text small-margin-bottom">
+        <div class="half-button primary-background float-left" ng-class="{'white-text': heroScreen == 'equipped'}" hm-tap="heroScreen = 'equipped'"><p>Equipped</p></div>
+        <div class="half-button primary-background float-right" ng-class="{'white-text': heroScreen == 'inventory'}" hm-tap="heroScreen = 'inventory'"><p>Bag</p></div>
+    </div>
+
+    <div class="hero-content clear white-text scroller" scrollable>
+        <div ng-show="heroScreen == 'stats'">
+            <p class="big-text primary-text small-margin-bottom small-padding-top">{{play.hero.name}}</p>
+            <p class="medium-margin-bottom">Level: {{play.hero.level}}</p>
+            <ul class="stat-list">
+                <li><p class="stat-name">Damage:</p> <p class="stat-val">{{play.hero.damage}}</p></li>
+                <li><p class="stat-name">Speed:</p> <p class="stat-val">{{play.hero.speed}}</p></li>
+                <li><p class="stat-name">Experience:</p> <p class="stat-val">{{play.hero.experiencePercent}}%</p></li>
+                <li><p class="stat-name">Strength:</p> <p class="stat-val">{{play.hero.strength}}</p></li>
+                <li><p class="stat-name">Vitality:</p> <p class="stat-val">{{play.hero.vitality}}</p></li>
+                <li><p class="stat-name">Agility:</p> <p class="stat-val">{{play.hero.agility}}</p></li>
+                <li><p class="stat-name">Life:</p> <p class="stat-val">{{play.hero.currentLife}}/{{play.hero.maxLife}}</p></li>
+                <li><p class="stat-name">Armor:</p> <p class="stat-val">{{play.hero.armor}}</p></li>
+                <li><p class="stat-name">Haste:</p> <p class="stat-val">{{play.hero.haste}}</p></li>
+                <li><p class="stat-name">Weight:</p> <p class="stat-val">{{play.hero.weight}}</p></li>
+                <li><p class="stat-name">Gold:</p> <p class="stat-val">{{play.hero.gold}}</p></li>
+            </ul>
+
+            <div class="black-background">
+                <div class="width-90 white-text desc-text">
+                    <p class="small-margin-bottom"><span class="yellow-text">Strength:</span><br />Increases your damage</p>
+                    <p class="small-margin-bottom"><span class="yellow-text">Vitality:</span><br />Increases your max life</p>
+                    <p class="small-margin-bottom"><span class="yellow-text">Agility:</span><br />Increases your chance to dodge</p>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="heroScreen == 'skills'" class="medium-margin-bottom">
+            <div>
+                <p class="white-text medium-text medium-padding-top small-margin-bottom">Passive Skills</p>
+                <ul class="stat-list">
+                    <li><p class="stat-name primary-text">Sword:</p> <p class="stat-val">{{play.hero.passiveSkills.sword}}</p></li>
+                    <li><p class="stat-name primary-text">Axe:</p> <p class="stat-val">{{play.hero.passiveSkills.axe}}</p></li>
+                    <li><p class="stat-name primary-text">Hammer:</p> <p class="stat-val">{{play.hero.passiveSkills.hammer}}</p></li>
+                    <li><p class="stat-name primary-text">Shortblade:</p> <p class="stat-val">{{play.hero.passiveSkills.shortblade}}</p></li>
+                    <li><p class="stat-name primary-text">Knuckles:</p> <p class="stat-val">{{play.hero.passiveSkills.knuckles}}</p></li>
+                </ul>
+            </div>
+
+            <div class="width-90">
+                <p class="white-text medium-text small-margin-bottom">Combat Skills</p>
+                <div ng-if="play.hero.combatSkills.length > 0" class="skill small-margin-bottom">
+                    <p class="primary-text small-margin-bottom">{{play.hero.combatSkills[0].name}}</p>
+                    <ul>
+                        <li class="white-text small-margin-bottom" ng-repeat="bullet in play.hero.combatSkills[0].bullets">{{bullet}}</li>
+                    <ul>
+                </div>
+                <div ng-if="play.hero.combatSkills.length > 1" class="skill">
+                    <p class="primary-text small-margin-bottom">{{play.hero.combatSkills[1].name}}</p>
+                    <ul>
+                        <li class="white-text small-margin-bottom" ng-repeat="bullet in play.hero.combatSkills[1].bullets">{{bullet}}</li>
+                    <ul>
+                </div>
+
+                <p ng-show="play.hero.combat.length < 1" class="yellow-text center-text medium-padding-top">You will get your first skill at <span class="primary-text">level 6</span> and your second skill at <span class="primary-text">level 12</span></p>
+                <p ng-show="play.hero.combat.length == 1" class="yellow-text center-text medium-padding-top">You will get your second skill at <span class="primary-text">level 12</span></p>
+            </div>
+        </div>
+
+        <div ng-show="heroScreen == 'equipped'">
+
+            <ul ng-if="!selectedToBag">
+                <li class="primary-background small-margin-bottom yellow-text small-text" ng-repeat="item in equippedSlots track by $index">
+                    <div ng-if="!item.empty" hm-tap="selectEquippedItem(item)" class="primary-background width-90">
+                        <p class="small-list-item overflow-auto pointer">
+                            <span class="center-text pointer">{{item.name}}</span>
+                        </p>
+                    </div>
+                    <!-- empty equipment slots -->
+                    <div ng-if="item.empty">
+                        <div class="primary-background width-90">
+                            <p class="small-list-item overflow-auto pointer">
+                                <span class="center-text desc-text white-text pointer">{{item.slot}} (None)</span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div ng-if="selectedToBag" class="primary-background expanded item-inspect black-text center-text overflow-auto">
+                <p class="item-name white-text medium-text medium-margin-bottom width-90" hm-tap="closeEquippedItem()">{{selectedToBag.name}}</p> 
+                <ul class="medium-margin-bottom" hm-tap="closeEquippedItem()">
+                    <li ng-show="selectedToBag.fingerprint.length < 4" class="center-text black-text">{{selectedToBag.type}}</li>
+                    <li ng-show="selectedToBag.class == 'armor'">Armor: <span class="white-text">{{selectedToBag.value}}</span></li>
+                    <li ng-show="selectedToBag.class == 'weapon'">Damage: <span class="white-text">{{selectedToBag.value}}</span></li>
+                    <li ng-show="selectedToBag.strength > 0">Strength: <span class="white-text">+{{selectedToBag.strength}}</span></li>
+                    <li ng-show="selectedToBag.vitality > 0">Vitality: <span class="white-text">+{{selectedToBag.vitality}}</span></li>
+                    <li ng-show="selectedToBag.agility > 0">Agility: <span class="white-text">+{{selectedToBag.agility}}</span></li>
+                    <li ng-show="selectedToBag.maxLife > 0">Life: <span class="white-text">+{{selectedToBag.maxLife}}</span></li>
+                    <li ng-show="selectedToBag.haste > 0">Haste: <span class="white-text">+{{selectedToBag.haste}}</span></li>
+                    <li>Weight: <span class="white-text">{{selectedToBag.weight}}</span></li>
+                    <li class="black-text">Worth: <span class="white-text">{{selectedToBag.worth}} gold</span></li>
+                </ul>
+                
+                <div class="button">
+                    <span class="medium-text yellow-background black-text pointer center-text" hm-tap="unequipItem()">Put in Bag</span>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="heroScreen == 'inventory'">
+
+            <div ng-if="play.hero.inventoryItems.length == 0">
+                <p class="medium-margin-top">No items in bag</p>
+            </div>
+            
+            <div ng-if="inventoryWeight > 10" class="medium-margin-bottom">
+                <p class="medium-margin-top small-margin-bottom primary-text">The items in your bag are<br />slowing you down</p>                
+                <p>Go sell some in the<br />pawn shop</p>
+            </div>
+
+            <ul ng-if="!selectedToEquip">
+                <li class="primary-background small-margin-bottom yellow-text small-text" ng-repeat="item in play.hero.inventoryItems track by $index">
+                    <div hm-tap="selectItem(item)" class="primary-background width-90">
+                        <p class="small-list-item overflow-auto pointer">
+                            <span class="center-text pointer">{{item.name}}</span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- life potion -->
+            <div class="primary-background item-inspect black-text center-text overflow-auto" ng-show="selectedToEquip && selectedToEquip.type == 'lifePotion'">
+                <p class="item-name white-text medium-text width-90 medium-padding-top medium-margin-bottom pointer" hm-tap="closeItem()">Life Potion</p>
+                <ul hm-tap="closeItem()" class="medium-margin-bottom black-text">
+                    <li class="medium-margin-bottom">Returns you to full life</li>
+                    <li class="medium-margin-bottom">Not usable during combat</li>
+                    <li>Weight: <span class="white-text">0.1</span></li>
+                    <li>Worth: <span class="white-text">5 gold</span></li>
+                </ul>
+
+                <div class="button">
+                    <span class="medium-text yellow-background black-text pointer center-text" hm-tap="drinkPotion()">Drink</span>
+                </div>
+            </div>
+
+            <!-- item -->
+            <div class="primary-background item-inspect black-text center-text overflow-auto" ng-if="selectedToEquip && selectedToEquip.type != 'lifePotion'">
+                <p class="item-name white-text medium-text medium-margin-bottom width-90 pointer" hm-tap="closeItem()">{{selectedToEquip.name}}</p>
+                <ul class="medium-margin-bottom" hm-tap="closeItem()">
+                    <li ng-show="selectedToEquip.fingerprint.length < 4" class="center-text black-text">{{selectedToEquip.type}}</li>
+                    <li ng-show="selectedToEquip.class == 'armor'">Armor: <span class="white-text">{{selectedToEquip.value}}</span></li>
+                    <li ng-show="selectedToEquip.class == 'weapon'">Damage: <span class="white-text">{{selectedToEquip.value}}</span></li>
+                    <li ng-show="selectedToEquip.strength > 0">Strength: <span class="white-text">+{{selectedToEquip.strength}}</span></li>
+                    <li ng-show="selectedToEquip.vitality > 0">Vitality: <span class="white-text">+{{selectedToEquip.vitality}}</span></li>
+                    <li ng-show="selectedToEquip.agility > 0">Agility: <span class="white-text">+{{selectedToEquip.agility}}</span></li>
+                    <li ng-show="selectedToEquip.maxLife > 0">Life: <span class="white-text">+{{selectedToEquip.maxLife}}</span></li>
+                    <li ng-show="selectedToEquip.haste > 0">Haste: <span class="white-text">+{{selectedToEquip.haste}}</span></li>
+                    <li>Weight: <span class="white-text">{{selectedToEquip.weight}}</span></li>
+                    <li class="black-text">Worth: <span class="white-text">{{selectedToEquip.worth}} gold</span></li>
+                </ul>
+                
+                <div class="button">
+                    <span class="medium-text yellow-background black-text pointer center-text" hm-tap="equipItem()">Equip</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
